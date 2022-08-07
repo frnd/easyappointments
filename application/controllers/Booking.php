@@ -93,7 +93,7 @@ class Booking extends EA_Controller {
 
         foreach ($available_providers as &$available_provider)
         {
-            // Only expose the required provider data. 
+            // Only expose the required provider data.
 
             $this->providers_model->only($available_provider, [
                 'id',
@@ -170,7 +170,7 @@ class Booking extends EA_Controller {
                 return;
             }
 
-            // Make sure the appointment can still be rescheduled. 
+            // Make sure the appointment can still be rescheduled.
 
             $start_datetime = strtotime($results[0]['start_datetime']);
 
@@ -203,6 +203,7 @@ class Booking extends EA_Controller {
             $provider = $this->providers_model->find($appointment['id_users_provider']);
             $customer = $this->customers_model->find($appointment['id_users_customer']);
             $customer_token = md5(uniqid(mt_rand(), TRUE));
+            $is_paid = $appointment['is_paid'];
 
             // Cache the token for 10 minutes.
             $this->cache->save('customer-token-' . $customer_token, $customer['id'], 600);
@@ -214,6 +215,7 @@ class Booking extends EA_Controller {
             $appointment = NULL;
             $provider = NULL;
             $customer = NULL;
+            $is_paid = 0;
         }
 
         script_vars([
@@ -268,9 +270,11 @@ class Booking extends EA_Controller {
             'grouped_timezones' => $grouped_timezones,
             'manage_mode' => $manage_mode,
             'customer_token' => $customer_token,
+            'is_paid' => $is_paid == 1,
             'appointment_data' => $appointment,
             'provider_data' => $provider,
             'customer_data' => $customer,
+            'company_email' => setting('company_email'),
         ]);
 
         $this->load->view('pages/booking');

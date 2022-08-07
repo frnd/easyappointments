@@ -38,6 +38,7 @@ App.Components.AppointmentsModal = (function () {
     const $appointmentLocation = $('#appointment-location');
     const $appointmentColor = $('#appointment-color');
     const $appointmentNotes = $('#appointment-notes');
+    const $appointmentIsPaid = $('#appointment-is-paid');
     const $reloadAppointments = $('#reload-appointments');
     const $selectFilterItem = $('#select-filter-item');
     const $selectService = $('#select-service');
@@ -88,6 +89,7 @@ App.Components.AppointmentsModal = (function () {
                 start_datetime: startDatetime,
                 end_datetime: endDatetime,
                 location: $appointmentLocation.val(),
+                is_paid: Number($appointmentIsPaid.prop('checked')),
                 color: App.Components.ColorSelection.getColor($appointmentColor),
                 notes: $appointmentNotes.val(),
                 is_unavailability: Number(false)

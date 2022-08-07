@@ -405,4 +405,10 @@ $lang['future_booking_limit_hint'] = 'Set the future limit in days customers can
 $lang['api_token'] = 'API Token';
 $lang['allow_rescheduling_cancellation_before'] = 'Allow Rescheduling/Cancellation Before';
 $lang['at_least_one_field'] = 'At least one field must be displayed in the booking page.';
+$lang['service_payment_link'] = 'Payment link';
+$lang['service_payment_link_description'] = 'You can include the following variables: {$appointment_hash}, {$customer_email}. In order to confirm the payment use /index.php/payment/confirm/{CHECKOUT_SESSION_ID} url as confirmation page in Stripe';
+$lang['appointment_payment_title'] = 'Payment details';
+$lang['appointment_payment_text'] = 'Click on the following link to proceed with payment';
+$lang['appointment_paymentPaid_text'] = 'El pago se ha realizado satisfactoriamente';
+$lang['payment_intent'] = 'Stripe Payment Intent';
 // End

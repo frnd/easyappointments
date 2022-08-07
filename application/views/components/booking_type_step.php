@@ -1,7 +1,7 @@
 <?php
 /**
  * Local variables.
- * 
+ *
  * @var array $available_services
  */
 ?>
@@ -17,7 +17,13 @@
                         <strong><?= lang('service') ?></strong>
                     </label>
 
-                    <select id="select-service" class="form-control">
+                    <?=$is_paid?>
+
+                    <?php if ($is_paid): ?>
+                        <select id="select-service" class="form-control" disabled="true">
+                    <?php else: ?>
+                        <select id="select-service" class="form-control">
+                    <?php endif ?>
                         <?php
                         // Group services by category, only if there is at least one service with a parent category.
                         $has_category = FALSE;
@@ -85,6 +91,18 @@
                         }
                         ?>
                     </select>
+                    <?php if ($is_paid): ?>
+                        <p class="warn">
+                            <?= strtr(lang('service_paid_warning'),
+                                [
+                                    '{$mail_link}' => strtr('<a href="maiilto:{$company_email}">{$company_email}</a>', [
+                                        '{$company_email}' => $company_email
+                                    ])
+                                ])
+                            ?>
+                            <?= lang('') ?>
+                        </p>
+                    <?php endif ?>
                 </div>
 
                 <div class="mb-3">

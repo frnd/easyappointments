@@ -158,6 +158,14 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label" for="location">
+                    <?= lang('service_payment_link') ?>
+                </label>
+                <input id="payment-link" class="form-control" disabled>
+                <small class="text-muted"><?= lang('service_payment_link_description') ?></small>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label" for="description">
                     <?= lang('description') ?>
                 </label>

@@ -29,6 +29,7 @@ App.Pages.Services = (function () {
     const $description = $('#description');
     const $filterServices = $('#filter-services');
     const $color = $('#color');
+    const $paymentLink = $('#payment-link');
     let filterResults = {};
     let filterLimit = 20;
 
@@ -141,7 +142,8 @@ App.Pages.Services = (function () {
                 availabilities_type: $availabilitiesType.val(),
                 attendants_number: $attendantsNumber.val(),
                 is_private: Number($isPrivate.prop('checked')),
-                id_categories: $category.val() || null
+                id_categories: $category.val() || null,
+                payment_link: $paymentLink.val()
             };
 
             if ($id.val() !== '') {
@@ -298,6 +300,7 @@ App.Pages.Services = (function () {
         $attendantsNumber.val(service.attendants_number);
         $isPrivate.prop('checked', service.is_private);
         App.Components.ColorSelection.setColor($color, service.color);
+        $paymentLink.val( service.payment_link);
 
         const categoryId = service.id_categories !== null ? service.id_categories : '';
         $category.val(categoryId);

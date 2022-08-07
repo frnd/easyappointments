@@ -118,6 +118,12 @@ class Email_messages {
             $appointment_end->setTimezone($appointment_timezone);
         }
 
+        $payment_link_vars = array(
+            '{$appointment_hash}' => $appointment['hash'],
+            '{$customer_email}' => $customer['email'],
+        );
+        $payment_link = strtr($service['payment_link'], $payment_link_vars);
+
         $html = $this->CI->load->view('emails/appointment_saved_email', [
             'email_title' => $subject,
             'email_message' => $message,
@@ -127,6 +133,8 @@ class Email_messages {
             'appointment_end_date' => $appointment_end->format($date_format . ' ' . $time_format),
             'appointment_timezone' => $timezones[empty($timezone) ? $provider['timezone'] : $timezone],
             'appointment_link' => $appointment_link_address,
+            'payment_link' => $payment_link,
+            'is_paid' => $appointment['is_paid'] == 1,
             'company_link' => $settings['company_link'],
             'company_name' => $settings['company_name'],
             'customer_name' => $customer['first_name'] . ' ' . $customer['last_name'],
@@ -229,6 +237,7 @@ class Email_messages {
             'customer_phone' => $customer['phone_number'],
             'customer_address' => $customer['address'],
             'reason' => $reason,
+            'payment_intent' => $appointment['payment_intent'],
         ], TRUE);
 
         $this->CI->email->from($settings['company_email'], $settings['company_email']);

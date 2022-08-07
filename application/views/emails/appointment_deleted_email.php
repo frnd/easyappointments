@@ -1,7 +1,7 @@
 <?php
 /**
  * Local variables.
- * 
+ *
  * @var string $company_name
  * @var string $appointment_service
  * @var string $appointment_provider
@@ -13,6 +13,7 @@
  * @var string $customer_address
  * @var string $reason
  * @var string $company_link
+ * @var string $payment_intent
  */
 ?>
 
@@ -54,6 +55,12 @@
                 <td class="label" style="padding: 3px;font-weight: bold;"><?= lang('timezone') ?></td>
                 <td style="padding: 3px;"><?= $appointment_timezone ?></td>
             </tr>
+            <?php if ($payment_intent ): ?>
+            <tr>
+                <td class="label" style="padding: 3px;font-weight: bold;"><?= lang('timezone') ?></td>
+                <td style="padding: 3px;"><?= $appointment_timezone ?></td>
+            </tr>
+            <?php endif ?>
         </table>
 
         <h2><?= lang('customer_details_title') ?></h2>
@@ -71,8 +78,8 @@
                 <td style="padding: 3px;"><?= $customer_phone ?></td>
             </tr>
             <tr>
-                <td class="label" style="padding: 3px;font-weight: bold;"><?= lang('address') ?></td>
-                <td style="padding: 3px;"><?= $customer_address ?></td>
+                <td class="label" style="padding: 3px;font-weight: bold;"><?= lang('payment_intent') ?></td>
+                <td style="padding: 3px;"><?= $payment_intent ?></td>
             </tr>
         </table>
 

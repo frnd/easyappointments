@@ -131,6 +131,7 @@ App.Utils.CalendarDefaultView = (function () {
                 $appointmentsModal.find('#appointment-id').val(appointment.id);
                 $appointmentsModal.find('#select-service').val(appointment.id_services).trigger('change');
                 $appointmentsModal.find('#select-provider').val(appointment.id_users_provider);
+                $appointmentsModal.find('#appointment-is-paid').prop('checked', appointment.is_paid);
 
                 // Set the start and end datetime of the appointment.
                 startMoment = moment(appointment.start_datetime);
@@ -348,6 +349,30 @@ App.Utils.CalendarDefaultView = (function () {
         const notes = event.extendedProps.data.notes;
 
         return notes.length > 100 ? notes.substring(0, 100) + '...' : notes;
+    }
+
+    /**
+     * Get the paid icon for the popup widget.
+     *
+     * @param {Event} event
+     */
+    function getIsPaidIcon(event) {
+        let payStatusIcon;
+        if(event.extendedProps && event.extendedProps.data){
+            const paid = event.extendedProps.data.is_paid
+            payStatusIcon = $('<span/>', {
+                'class': paid ? 'fas fa-check text-success' : 'fas fa-times text-danger'
+            })
+        } else {
+            payStatusIcon = $('<span/>', {
+                'class': 'fas fa-triangle-exclamation text-danger'
+            })
+        }
+        return $('<div/>', {
+            'html': [
+                payStatusIcon
+            ]
+        }).html();
     }
 
     /**
@@ -669,6 +694,18 @@ App.Utils.CalendarDefaultView = (function () {
                     }),
                     $('<br/>'),
 
+                    info.event.extendedProps.data.service.payment_link
+                     ? $('<strong/>', {
+                            'text': lang('is_paid')
+                        })
+                     : undefined,
+                    info.event.extendedProps.data.service.payment_link
+                     ? App.Utils.CalendarEventPopover.getIsPaidIcon(info.event)
+                     : undefined,
+                    info.event.extendedProps.data.service.payment_link
+                     ? $('<br/>')
+                     : undefined,
+
                     $('<hr/>'),
 
                     $('<div/>', {
@@ -725,7 +762,7 @@ App.Utils.CalendarDefaultView = (function () {
         lastFocusedEventData = info.event;
 
         $target.popover('show');
-        
+
         $popoverTarget = $target;
 
         // Fix popover position.
@@ -1665,6 +1702,7 @@ App.Utils.CalendarDefaultView = (function () {
             $appointmentsModal.find('#appointment-id').val(appointment.id);
             $appointmentsModal.find('#select-service').val(appointment.id_services).trigger('change');
             $appointmentsModal.find('#select-provider').val(appointment.id_users_provider);
+            $appointmentsModal.find('#appointment-is-paid').prop('checked', appointment.is_paid);
 
             // Set the start and end datetime of the appointment.
             const startDatetimeMoment = moment(appointment.start_datetime);

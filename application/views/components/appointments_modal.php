@@ -168,6 +168,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="mb-3 form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="appointment-is-paid">
+
+                                    <label class="form-check-label" for="appointment-is-paid">
+                                        <?= lang('is_paid') ?>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </fieldset>

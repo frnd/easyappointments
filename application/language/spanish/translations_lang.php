@@ -405,4 +405,11 @@ $lang['future_booking_limit_hint'] = 'Set the future limit in days customers can
 $lang['api_token'] = 'API Token';
 $lang['allow_rescheduling_cancellation_before'] = 'Allow Rescheduling/Cancellation Before';
 $lang['at_least_one_field'] = 'At least one field must be displayed in the booking page.';
+$lang['service_payment_link'] = 'Enlace para el pago';
+$lang['service_payment_link_description'] = 'Puedes incluir las siguientes variables: {$appointment_hash}, {$customer_email}. Para procesar la confirmación del pago puedes usar la url /index.php/payment/confirm/{CHECKOUT_SESSION_ID} como pagina de confirmación en Stripe.';
+$lang['appointment_payment_title'] = 'Detalles del pago';
+$lang['appointment_payment_text'] = 'Pulse en el siguiente enlace para proceder con el pago';
+$lang['appointment_paymentPaid_text'] = 'Payment has been successfully completed';
+$lang['payment_intent'] = 'ID del pago';
+$lang['service_paid_warning'] = 'No es posible cambiar un servicio ya pagado. Pongase en contacto en el correo {$mail_link} para más información.';
 // End
